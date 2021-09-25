@@ -1,6 +1,6 @@
 package com.inu.activitys
 
-import android.app.Activity
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.inu.activitys.databinding.ActivityMainBinding
@@ -18,6 +17,7 @@ import com.inu.activitys.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     // lazy 를 사용해서 처음 호출될 때 초기화 되도록 설정
     // binding 이 프로퍼티로 선언되어 있기 때문에 액티비티 전체에서 호출 가능
+    // lazy, lateinit : 변수 선언 후 늦은 초기화시 null로 선언할 필요가 없을 때 사용
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     private lateinit var getResultText: ActivityResultLauncher<Intent>
@@ -48,8 +48,8 @@ class MainActivity : AppCompatActivity() {
         binding.btnStart.setOnClickListener { startActivityForResult(intent, 99) }
         */
     // 2부. 컨테이너
-        var data = listOf("- 선택하세요 -", "1월", "2월", "3월", "4월", "5월", "6월")
-        var adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, data)
+        val data = listOf("- 선택하세요 -", "1월", "2월", "3월", "4월", "5월", "6월")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, data)
         binding.spinner.adapter = adapter
         binding.spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, id: Long) {
