@@ -18,7 +18,7 @@ class SubActivity : AppCompatActivity() {
 
         binding.btnClose.setOnClickListener {
             val returnIntent = Intent()
-            returnIntent.putExtra("returnValue", binding.editMessage.text.toString())
+            returnIntent.putExtra("STRING_INTENT_KEY", binding.editMessage.text.toString())
             setResult(Activity.RESULT_OK, returnIntent)
             finish()
         }
