@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.inu.activitys.databinding.ActivityMainBinding
 import com.inu.activitys.databinding.ActivitySubBinding
 
 class SubActivity : AppCompatActivity() {

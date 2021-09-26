@@ -10,8 +10,9 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.inu.activitys.databinding.ActivityMainBinding
-
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnStart.setOnClickListener { startActivityForResult(intent, 99) }
         */
+
     // 2부. 컨테이너
         val data = listOf("- 선택하세요 -", "1월", "2월", "3월", "4월", "5월", "6월")
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, data)
@@ -57,8 +59,27 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) { }
+
         }
+
+// 라사이클러 뷰
+        val datas:MutableList<Memo> = loadData()
+        var adapters = CustomAdapter()
+        adapters.listData = datas
+        recyclerView.adapter = adapters
+        recyclerView.layoutManager = LinearLayoutManager(this)
     }
+    fun loadData(): MutableList<Memo> {
+        val data:MutableList<Memo> = mutableListOf()
+        for (no in 1..100) {
+            val title = "이것이 코틀린 안드로이드다 ${no}"
+            val date = System.currentTimeMillis()
+            var memo = Memo(no, title, date)
+            data.add(memo)
+        }
+        return data
+    }
+
 
     /*  depricated onActivityResult()
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
